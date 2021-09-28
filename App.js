@@ -6,7 +6,6 @@ import { createStackNavigator } from "@react-navigation/stack"
 import HistoryScreen from './app/HistoryScreen';
 import SearchScreen from './app/SearchScreen';
 import TransferScreen from './app/TransferScreen';
-import TestScreen from './app/TestScreen';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +16,6 @@ function App(props) {
         <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
         <Stack.Screen name="TransferScreen" component={TransferScreen} />
-        <Stack.Screen name="TestScreen" component={TestScreen} />
       </Stack.Navigator>
     </NavigationContainer >
   );
