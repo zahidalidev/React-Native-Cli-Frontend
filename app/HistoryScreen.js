@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, TouchableOpacity, ScrollView, Image, Platform, Dimensions } from 'react-native';
 import { RFPercentage } from "react-native-responsive-fontsize"
 import FeIcon from "react-native-vector-icons/Feather"
 import FIcon from "react-native-vector-icons/Fontisto"
+import { Appbar } from 'react-native-paper';
 
 
 // images
@@ -10,6 +11,8 @@ import ppt1 from "../assets/images/ppt1.png"
 import fur1 from "../assets/images/fur1.png"
 import doc1 from "../assets/images/doc1.png"
 import food1 from "../assets/images/food1.png"
+
+const { width } = Dimensions.get("window");
 
 function HistoryScreen(props) {
 
@@ -34,13 +37,13 @@ function HistoryScreen(props) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar backgroundColor="#F5F9FA" barStyle="dark-content" />
+            <StatusBar backgroundColor="white" barStyle="dark-content" />
 
-            <View style={{ marginTop: RFPercentage(3), width: "85%", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
-                <Text style={{ fontFamily: "Metropolis-Medium", fontSize: RFPercentage(3.5) }} >Recents</Text>
-                <View style={{ flexDirection: "row" }} >
-                    <TouchableOpacity onPress={() => props.navigation.navigate("SearchScreen")} style={{ marginRight: RFPercentage(3) }} >
-                        <FeIcon name="search" color="black" size={RFPercentage(3)} />
+            <Appbar.Header style={{ backgroundColor: "white", width: "100%", justifyContent: "space-between" }} >
+                <Appbar.Content style={{ marginLeft: Platform.OS === "ios" ? (width / 3 + RFPercentage(2.5)) : RFPercentage(2), fontFamily: "Metropolis-Medium", }} color={"black"} title="Recents" />
+                <View style={{ flexDirection: "row", marginRight: RFPercentage(3) }} >
+                    <TouchableOpacity onPress={() => props.navigation.navigate("SearchScreen")} style={{ marginRight: RFPercentage(1) }} >
+                        <FeIcon name="search" color="black" size={RFPercentage(2.8)} />
                     </TouchableOpacity>
                     <View>
                         <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", flex: 1 }} >
@@ -49,7 +52,8 @@ function HistoryScreen(props) {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </Appbar.Header>
+
 
             {/* send and receive buttons */}
             <View style={{ borderRadius: 8, backgroundColor: "white", marginTop: RFPercentage(5), width: "85%", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
@@ -67,7 +71,7 @@ function HistoryScreen(props) {
 
                 <ScrollView style={{ marginTop: RFPercentage(2), marginBottom: RFPercentage(1) }} horizontal={true} showsHorizontalScrollIndicator={false} >
                     {imagesList.map((item, index) => (
-                        <Image source={item} key={index} style={{ borderRadius: 8, marginRight: RFPercentage(0.7), width: RFPercentage(10), height: RFPercentage(10) }} />
+                        <Image source={item} key={index} style={{ borderRadius: 8, marginRight: RFPercentage(0.7), width: RFPercentage(7.5), height: RFPercentage(7.5) }} />
                     ))}
                 </ScrollView>
 
