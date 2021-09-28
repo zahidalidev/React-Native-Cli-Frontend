@@ -1,63 +1,45 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { RFPercentage } from 'react-native-responsive-fontsize';
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import FIcon from "react-native-vector-icons/FontAwesome"
+import IoIcon from "react-native-vector-icons/Ionicons"
+
 import { TouchableOpacity } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import { TouchableWithoutFeedback } from 'react-native';
 
-function Card({ description, date, id, onPress, onHandleHistoryData }) {
-    const gradColors = [
-        {
-            color1: "#81c5f1",
-            color2: "#8cadf4",
-            color3: "rgb(149, 196, 237)",
-        },
-        {
-            color1: "#c5c6c9",
-            color2: "#949caa",
-            color3: "#949caa",
-        },
-        {
-            color1: "#bcd6cd",
-            color2: "#9fcebe",
-            color3: "#9fcebe",
-        },
+function Card({ size, name, id, onPress, image }) {
 
-    ]
-
-    const index = id % 3;
+    const [play, setPlay] = useState(false);
 
     const ListItemDeleteAction = () => {
         return (
             <TouchableWithoutFeedback key={id + 'i'} onPress={() => onPress(id)} >
                 <View style={styles.container}>
-                    <MaterialCommunityIcons name="trash-can" size={RFPercentage(4)} color="#d36969" />
+                    <FIcon name="trash" size={RFPercentage(2.2)} color="white" />
                 </View>
             </TouchableWithoutFeedback>
         );
     }
 
     return (
-        <Swipeable key={id} renderRightActions={ListItemDeleteAction} >
-            <TouchableOpacity activeOpacity={1} onPress={() => onHandleHistoryData(description)} style={{
-                width: "83%", marginLeft: "8%", borderWidth: 0.7, borderColor: gradColors[index].color1, backgroundColor: "#e2e2e2",
-                marginTop: RFPercentage(2), borderRadius: RFPercentage(3), flex: 1, height: RFPercentage(15)
-            }}>
-                <View style={{ padding: RFPercentage(3), flexDirection: "column", justifyContent: "center", alignItems: "flex-start" }} >
-                    <Text style={{ fontWeight: "bold", color: "black", fontSize: RFPercentage(2.3) }} >{date}</Text>
-                    <View style={{ marginTop: RFPercentage(1), flexDirection: "row", justifyContent: "center", maxWidth: "80%" }} >
-                        <Text numberOfLines={3} style={{ color: "black", fontSize: RFPercentage(2) }} >
-                            {description}
-                        </Text>
+        <Swipeable key={id} containerStyle={{ marginTop: RFPercentage(1), width: "100%" }} renderRightActions={ListItemDeleteAction} >
+            <TouchableOpacity onPress={() => setPlay(!play)} activeOpacity={0.8} style={{ marginLeft: "5%", alignItems: "center", borderRadius: 10, padding: 10, flexDirection: "row", width: "90%", backgroundColor: "white" }} >
+                <Image source={image} style={{ borderRadius: RFPercentage(1), width: RFPercentage(6), height: RFPercentage(6) }} />
+                <View style={{ marginLeft: RFPercentage(1), width: "80%" }} >
+                    <Text style={{ fontSize: RFPercentage(2.4), fontFamily: "Metropolis-SemiBold", color: "black" }} >{name}</Text>
+                    <View style={{ marginBottom: RFPercentage(1), marginTop: RFPercentage(1), width: "100%", backgroundColor: "#F5F9FA", height: 2 }} >
+                        <View style={{ width: "30%", backgroundColor: "#65C8D8", height: 2 }} ></View>
                     </View>
-                </View>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }} >
+                        <View style={{ flexDirection: "row", alignItems: "center" }} >
+                            <IoIcon style={{ marginRight: 3 }} name={play ? "pause" : "play"} color="black" size={RFPercentage(1.5)} />
 
-                <View style={{ backgroundColor: "grey", alignItems: "center", justifyContent: "center", borderRadius: RFPercentage(3), borderBottomLeftRadius: 100, borderTopLeftRadius: 100, top: -5, left: "85%", right: 0, bottom: 0, position: "absolute" }} >
-                    <TouchableOpacity activeOpacity={0.1} >
-                        <MaterialCommunityIcons size={RFPercentage(2.8)} name="chevron-left" color="white" />
-                    </TouchableOpacity>
+                            <Text style={{ color: "#a5a5a5", fontFamily: "Metropolis-Regular", fontSize: RFPercentage(1.8) }} >{size}</Text>
+                        </View>
+                        <Text style={{ color: "#a5a5a5", fontFamily: "Metropolis-Regular", fontSize: RFPercentage(1.8) }} >400kb</Text>
+                    </View>
                 </View>
             </TouchableOpacity>
         </Swipeable>
@@ -66,9 +48,10 @@ function Card({ description, date, id, onPress, onHandleHistoryData }) {
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: "#d36969",
-        width: "10%",
-        marginRight: "8%",
+        backgroundColor: "#ce3535",
+        width: "11%",
+        marginRight: "5%",
+        borderRadius: 10,
         // marginLeft: -RFPercentage(5),
         justifyContent: "center",
         alignItems: "center"
