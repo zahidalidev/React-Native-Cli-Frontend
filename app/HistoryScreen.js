@@ -39,7 +39,7 @@ function HistoryScreen(props) {
             <View style={{ marginTop: RFPercentage(3), width: "85%", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
                 <Text style={{ fontFamily: "Metropolis-Medium", fontSize: RFPercentage(3.5) }} >Recents</Text>
                 <View style={{ flexDirection: "row" }} >
-                    <TouchableOpacity style={{ marginRight: RFPercentage(3) }} >
+                    <TouchableOpacity onPress={() => props.navigation.navigate("SearchScreen")} style={{ marginRight: RFPercentage(3) }} >
                         <FeIcon name="search" color="black" size={RFPercentage(3)} />
                     </TouchableOpacity>
                     <View>
@@ -77,7 +77,7 @@ function HistoryScreen(props) {
                             index <= 2 ?
                                 <Image source={item} key={index} style={{ borderRadius: RFPercentage(3), marginRight: RFPercentage(-1.2), width: RFPercentage(3.5), height: RFPercentage(3.5) }} />
                                 : (index === 3 ?
-                                    <View style={{ justifyContent: "center", alignItems: 'center', backgroundColor: "#65C8D8", borderRadius: RFPercentage(3), marginRight: RFPercentage(-1.2), width: RFPercentage(3.5), height: RFPercentage(3.5) }} >
+                                    <View key={index} style={{ justifyContent: "center", alignItems: 'center', backgroundColor: "#65C8D8", borderRadius: RFPercentage(3), marginRight: RFPercentage(-1.2), width: RFPercentage(3.5), height: RFPercentage(3.5) }} >
                                         <Text style={{ color: "white", fontSize: RFPercentage(2) }} >+3</Text>
                                     </View>
                                     : null

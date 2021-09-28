@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 
 // Screens
 import HistoryScreen from './app/HistoryScreen';
+import SearchScreen from './app/SearchScreen';
 
 const Stack = createStackNavigator();
 
@@ -12,6 +13,7 @@ function App(props) {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="HistoryScreen" >
         <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
+        <Stack.Screen name="SearchScreen" component={SearchScreen} />
       </Stack.Navigator>
     </NavigationContainer >
   );
